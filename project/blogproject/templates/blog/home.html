@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %} {% load static %} {% block content%}
+<div class="col-sm-10">
+    <h3>Home Page</h3>
+    {% for i in val %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container ">
+            <h1 class="display-6 ">{{forloop.counter}}.{{i.title}}</h1>
+            <p class="lead ">{{i.content}}</p>
+        </div>
+
+    </div>
+
+    <button id="like{{i.id}}" name="like{{i.id}}" value="like/{{i.id}}" class={{i.id}}>like  </button> <span id="{{i.id}}">{{i.likes}} </span> <br><a href="commentpage/{{i.id}} ">comment</a> {% for j in commentval %} {% if i.id == j.blog %}
+    <div class="media ">
+
+
+        <div class="media-body ">
+            <h6 class="mt-0 "> {{j.blogcomment}} </h6>
+            <small>Created By : {{j.created_by}} </small><br><br>
+        </div>
+    </div>
+    {% endif %} {% endfor %} {% endfor %}
+</div>
+
+{% endblock content%}

@@ -1,0 +1,116 @@
+{% extends 'blog/baseadmin.html' %} {% load static %} {% block content%}
+<div id="main-content">
+    <div class="container-fluid">
+
+        <div class="row clearfix">
+            <div class="col-md-6 col-sm-12">
+                <h5>Add Post</h5>
+
+            </div>
+
+
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-12">
+
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="row clearfix">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Enter Title</label> {{form.title}}
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <label>Enter Description</label> {{form.content}}
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="form-group">
+
+                                <input type="hidden" value="{{name}}" name="author" id="author_id">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-12">
+
+
+                        <button type="submit" class="btn btn-primary">Submit</button><br> {% if messages %} {% for msg in messages %}
+                        <span {% if msg.tags %} class="alert-{{msg.tags}}" {% endif %}>{{msg}}</span> {% endfor %} {% endif %}
+                    </div>
+
+
+            </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</div>
+<div class="row clearfix">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="header">
+                <h5>Post List </h5>
+                <ul class="header-dropdown dropdown">
+
+                    <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="javascript:void(0);">Action</a></li>
+                            <li><a href="javascript:void(0);">Another Action</a></li>
+                            <li><a href="javascript:void(0);">Something else</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="body">
+                <div class="table-responsive">
+                    <table class="table table-hover js-basic-example dataTable table-custom spacing5">
+                        <thead>
+
+                            <tr>
+                                <th>Srno</th>
+                                <th>Enrolled Date&time</th>
+                                <th>title</th>
+                                <th>content</th>
+                                <th>author</th>
+
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for i in post %}
+                            <tr>
+                                <td> {{ forloop.counter }}</td>
+                                <td>{{i.created_on}}</td>
+                                <td>{{i.title}}</td>
+                                <td>{{i.content}}</td>
+                                <td>{{i.author}}</td>
+                                <td><a href="/dashpage/{{i.id}}">Edit </a></td>
+                                <td><a href="/postdel/{{i.id}}" onclick="return confirm('Do you want to Delete?');">Delete </a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+{% endblock content%}
